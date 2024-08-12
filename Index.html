@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zharfan Tweaks - Optimización Profesional para tu PC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="logo" style="position: absolute; top: 20px; left: 20px; cursor: pointer; transition: transform 0.3s ease;" onclick="showSection('inicio')" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></div>
+    <div class="background-gradient"></div>
+    <div class="container">
+        <header>
+            <h1 style="font-size: 3em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Zharfan Tweaks</h1>
+            <p class="subtitle">Lleva tu PC al siguiente nivel con nuestras optimizaciones</p>
+        </header>
+        
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        
+        <nav class="tabs" id="mobileMenu">
+            <div class="tab active" onclick="showSection('inicio')">Inicio</div>
+            <div class="tab" onclick="showSection('basicos')">Tweaks Básicos</div>
+            <div class="tab" onclick="showSection('avanzados')">Tweaks Avanzados</div>
+            <div class="tab" onclick="showSection('comentarios')">Comentarios</div>
+        </nav>
+        
+        <main>
+            <section id="inicio" class="section active">
+                <h2>Bienvenido a Zharfan Tweaks</h2>
+                <p>Descubre cómo llevar el rendimiento de tu PC al siguiente nivel con nuestras técnicas de optimización probadas y efectivas para maximizar la eficiencia de tu sistema.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-tachometer-alt feature-icon"></i>
+                        <h3>Rendimiento Mejorado</h3>
+                        <p>Aumenta la velocidad y eficiencia de tu PC</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h3>Optimización Segura</h3>
+                        <p>Tweaks probados y seguros para tu sistema</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3>Soporte Experto</h3>
+                        <p>Asistencia personalizada de nuestro equipo</p>
+                    </div>
+                </div>
+                <a href="#" class="btn" onclick="showSection('basicos')">Comenzar la Optimización</a>
+            </section>
+            
+            <section id="basicos" class="section">
+                <h2>Tweaks Básicos</h2>
+                <p>Nuestros tweaks básicos son el punto de partida perfecto para mejorar el rendimiento de tu PC. Estos ajustes son seguros y efectivos para cualquier usuario.</p>
+                <ul>
+                    <li>Deshabilite la protección de memoria DMA y el aislamiento de núcleos ("protección basada en virtualización").
+                            <p>bcdedit /set vsmlaunchtype Off</p>
+                            <p>bcdedit /set vm No</p>
+                            <p>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\FVE</p>
+                            <p>DisableExternalDMAUnderLock -> 0</p>
+                            <p>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard</p>
+                            <p>EnableVirtualizationBasedSecurity -> 0</p>
+                            <p>HVCIMATRequired -> 0</p>
+                    </li>
+                    <li>Utilice prioridad en tiempo real para la CPU.
+                        <p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions</p>
+                        <p>CpuPriorityClass -> 4</p>
+                        <p>IoPriority -> 3</p>
+                    </li>
+                    <li>Habilite la memoria administrada por kernel y deshabilite los parches Meltdown/Spectre. 
+                        <p>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</p>
+                        <p>FeatureSettings -> 1</p>
+                        <p>FeatureSettingsOverride -> 3</p>
+                        <p>FeatureSettingsOverrideMask -> 3</p>
+                    </li>
+                    <li>Deshabilite mitigaciones NTFS/ReFS adicionales.
+                        <p>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager</p>
+                        <p>ProtectionMode -> 0</p>
+                    </li>
+                    <li>Utilice el almacenamiento en caché de la memoria del sistema para mejorar el rendimiento.
+                        <p>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</p>
+                        <p>LargeSystemCache -> 1</p>
+                    </li>
+                    <li>Desactivar el antivirus de Windows Defender(opcional)
+                        <p>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender</p>
+                        <p>DisableAntiSpyware -> 1</p>
+                        <p>DisableRoutinelyTakingAction -> 1</p>
+                        <p>ServiceKeepAlive -> 0</p>
+                    </li>
+                    <li>Deshabilitar la compresión de RAM.
+                        <p>powershell "Disable-MMAgent -MemoryCompression"</p>
+                    </li>
+                    <li>No permitir que los controladores se convinen en la memoria virtual.
+                        <p>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management</p>
+                        <p>DisablePagingExecutive -> 1</p>
+                    </li>
+                    <li>Deshabilite mitigaciones NTFS/ReFS adicionales.
+                        <p>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager</p>
+                        <p>ProtectionMode -> 0</p>
+                    </li>
+                    <li>Establezca una marca de tiempo confiable de 1 ms (como mínimo). Solo para sistemas sin modificaciones (se recomienda deshabilitarla con 0 en sistemas modificados).
+                        <p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability</p>
+                        <p>TimeStampInterval -> 1</p>
+                    </li>
+                    <li>Deshabilite la telemetría.
+                        <p>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection</p>
+                        <p>AllowTelemetry -> 0</p>
+                    </li>
+                    <li>Deshabilitar la telemetría de la aplicación.
+                        <p>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat</p>
+                        <p>AITEnable -> 0</p>
+                    </li>
+                    <li>Reducir el tamaño del búfer del ratón y del teclado.
+                        <p>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mouclass\Parameters</p>
+                        <p>MouseDataQueueSize -> 16 decimal</p>
+                        <p>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters</p>
+                        <p>KeyboardDataQueueSize -> 16 decimal</p>
+                    </li>
+                </ul>
+                <p>Si no te salen algunas de estas opciones en el editor de registro puedes crearla dandole click izquierdo, nuevo, y DWORD32BITS y ponerle los valores.</p>
+                <a href="https://mega.nz/folder/Dz4UTT5C#0k6_lYrMWHRkPP16NVbnlQ" class="btn" target="_blank">Descarga la optimización básica</a>
+            </section>
+            
+            <section id="avanzados" class="section">
+                <h2>Tweaks Avanzados</h2>
+                <p>Para usuarios experimentados y entusiastas del rendimiento, nuestros tweaks avanzados ofrecen optimizaciones de otro nivel.</p>
+                <ul>
+                    <li>Configuración extrema en el símbolo del sistema</li>
+                    <li>Optimización avanzada de memoria RAM y caché</li>
+                    <li>Tweaks de registro especializados para gamers</li>
+                    <li>Configuración de red para reducir la latencia al mínimo</li>
+                    <li>Ajustes de virtualización para máximo rendimiento</li>
+                    <li>Ajuste de plan de energia para el maximo rendimiento</li>
+                    <li>Mejor configuración de tarjetas gráficas NVIDIA y AMD</li>
+                    <li>Desavilitan servicios inecesarios de Windows</li>
+                </ul>
+                <a href="https://mega.nz/folder/fngjzLbI#8_V9naE7Ye38qsL7wv6lcw" class="btn" target="_blank">Descarga los Tweaks Avanzados</a>
+            </section>
+            
+            <section id="comentarios" class="section">
+                <h2>Comentarios de Usuarios</h2>
+                <div class="comentarios-container">
+                    <div class="comentarios-lista" id="comentariosLista"></div>
+                    <div class="comentario-form">
+                        <form id="comentarioForm" onsubmit="return agregarComentario()">
+                            <input type="text" id="nombreComentario" placeholder="Tu nombre" required>
+                            <textarea id="textoComentario" placeholder="Comparte tu experiencia con Zharfan Tweaks" required style="height: 150px; resize: vertical;"></textarea>
+                            <button type="submit" class="btn">Enviar Comentario</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>Para soporte técnico y las últimas actualizaciones, únete a nuestra comunidad en Discord</p>
+            <div class="social-links">
+                <a href="https://discord.gg/h3yCrKmRQU" class="btn social-btn" target="_blank">
+                    <i class="fab fa-discord"></i> Unirse al Discord de Zharfan Tweaks
+                </a>
+                <a href="https://www.youtube.com/@zharfanlol" class="btn social-btn" target="_blank">
+                    <i class="fab fa-youtube"></i> Suscríbete en YouTube
+                </a>
+                <a href="https://www.instagram.com/zharfanlol?igsh=MWtwNHZycm4ydTIyZQ==" class="btn social-btn" target="_blank">
+                    <i class="fab fa-instagram"></i> Sígueme en Instagram
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
